@@ -27,10 +27,12 @@ namespace StatsEngine.Pages
             NumericVector group2 = engine.Evaluate("group2 <- c(29.89, 29.93, 29.72, 29.98, 30.02, 29.98)").AsNumeric();
 
             // Test difference of mean and get the P-value.
-            GenericVector testResult = engine.Evaluate("t.test(group1, group2)").AsList();
-            double p = testResult["p.value"].AsNumeric().First();
+            //GenericVector testResult = engine.Evaluate("t.test(group1, group2)").AsList();
+            //double p = testResult["p.value"].AsNumeric().First();
+            engine.Evaluate("result <- mean(group1)");
+            double p = engine.GetSymbol("result").AsNumeric().First();
 
-            return Content($"the p value is: {p}");
+            return Content($"the mean is: {p}");
 
         }
     }
